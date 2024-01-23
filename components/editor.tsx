@@ -3,7 +3,8 @@
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
 import { BlockNoteView, useBlockNote } from "@blocknote/react";
 import { useTheme } from "next-themes";
-import "@blocknote/core/style.css";
+import "@blocknote/react/style.css";
+// import "@blocknote/core/style.css";
 
 import { useEdgeStore } from "@/lib/edgestore";
 
@@ -28,8 +29,9 @@ export const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
   const editor: BlockNoteEditor = useBlockNote({
     editable,
     initialContent: initialContent
-      ? (JSON.parse(initialContent) as PartialBlock[])
-      : undefined,
+      ? JSON.parse(initialContent)
+      : // as PartialBlock[]
+        undefined,
     onEditorContentChange: (editor) => {
       onChange(JSON.stringify(editor.topLevelBlocks, null, 2));
     },
@@ -45,3 +47,5 @@ export const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
     </div>
   );
 };
+
+export default Editor;
